@@ -1,14 +1,17 @@
-#include "WiFi.h"
-#include "ESPAsyncWebServer.h"
-#include "SPIFFS.h"
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <WiFiAP.h>
 
-const char* ssid = "WIZZ";
-const char* password = "46196ace4a";
-
-const int ledPin = 2;
-String ledState;
+#include <ESPAsyncWebServer.h>
+#include <SPIFFS.h>
+ 
+const char* ssid     = "ACA";
+const char* password = "123456789";
 
 AsyncWebServer server(80);
+
+#define ledPin  2    // LED en terminal 2
+String ledState;
 
 // Replaces placeholder with LED state value
 String processor(const String& var){
@@ -25,18 +28,19 @@ String processor(const String& var){
   }
   return String();
 }
- 
-void setup(){
+
+
+void setup() {
   Serial.begin(115200);
   pinMode(ledPin, OUTPUT);
 
-  // Initialize SPIFFS
+   // Initialize SPIFFS
   if(!SPIFFS.begin(true)){
     Serial.println("An Error has occurred while mounting SPIFFS");
     return;
   }
 
-// ----------------- Conecta a la red wifi. como AP ---------------
+// Conecta a la red wifi.
   Serial.println();
   Serial.print("Configurando Punto de Acceso:  ");
   Serial.println(ssid);
@@ -47,17 +51,6 @@ void setup(){
   Serial.print("Esta es la IP para conectar: ");
   Serial.print("http://");
   Serial.println(myIP);
-
-
-  // Connect to Wi-Fi
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Connecting to WiFi..");
-  }
-
-  // Print ESP32 Local IP Address
-  Serial.println(WiFi.localIP());
 
   // Route for root / web page
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -83,8 +76,11 @@ void setup(){
 
   // Start server
   server.begin();
+
 }
  
-void loop(){
-  
+void loop() {
+
+   
+ 
 }

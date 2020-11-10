@@ -1,14 +1,17 @@
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
 #include "SPIFFS.h"
+#include "WiFiAP.h"
+#include "WiFiClient.h"
 
-const char* ssid = "WIZZ";
-const char* password = "46196ace4a";
+const char* ssid = "WIZZARD";
+const char* password = "123456789";
+AsyncWebServer server(80);
 
 const int ledPin = 2;
 String ledState;
 
-AsyncWebServer server(80);
+
 
 // Replaces placeholder with LED state value
 String processor(const String& var){
@@ -49,15 +52,16 @@ void setup(){
   Serial.println(myIP);
 
 
+
   // Connect to Wi-Fi
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Connecting to WiFi..");
-  }
+ // WiFi.begin(ssid, password);
+ // while (WiFi.status() != WL_CONNECTED) {
+ //  delay(1000);
+ //  Serial.println("Connecting to WiFi..");
+ // }
 
   // Print ESP32 Local IP Address
-  Serial.println(WiFi.localIP());
+ // Serial.println(WiFi.localIP());
 
   // Route for root / web page
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -86,5 +90,5 @@ void setup(){
 }
  
 void loop(){
-  
+ 
 }
