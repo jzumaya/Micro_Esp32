@@ -1,6 +1,6 @@
 #include <WiFi.h>
 #include <WiFiClient.h>
-#include <WiFiAP.h>
+//#include <WiFiAP.h>
  
 const char* ssid     = "WIZZ";
 const char* password = "46196ace4a";
