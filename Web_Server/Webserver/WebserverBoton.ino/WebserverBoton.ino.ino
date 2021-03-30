@@ -80,7 +80,8 @@ void loop() {
   client.println("<h2><font color='#009900'>Webserver 1.0</font></h2>");
   client.println("<h3>Practica boton</h3>");
   client.println("<br><br>");
-  client.println("<a href='on2'><button>Enciende LED2</button></a>");
+  client.println("<p style="font-size:4em">Celsius1</p>");
+  client.println("<h1><a href='on2'><button>Enciende LED2</button></h1></a>");
   client.println("<a href='off2'><button>Apaga LED2</button></a>"); 
   client.println("<br><br>");
   client.println(estado);
